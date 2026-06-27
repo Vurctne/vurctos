@@ -1,6 +1,6 @@
-# Vurctne OS Project
+# VurctOS Project
 
-This is a local Vurctne OS creator project.
+This is a local VurctOS creator project.
 
 Use this folder to keep one creative workflow organized from input assets to final output.
 

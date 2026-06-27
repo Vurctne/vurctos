@@ -2,17 +2,19 @@
 
 ## The Big Idea
 
-Vurctne OS is not just a workflow tool.
+VurctOS is not a folder workflow tool.
 
 It is intended to become a personal AI operating system that learns how the user thinks, works, creates, decides, and improves.
 
-The first version starts with local folders and markdown because that is the smallest reliable foundation. The long-term goal is larger: an AI creative team that can remember project context, understand user style, reuse proven workflows, and coordinate existing AI subscriptions without making the user copy-paste everything manually.
+The product center is the VurctOS Core Assistant. It understands user intent, looks up memory, selects project context, delegates work to multiple AI tools, reviews outputs, and learns from the result.
+
+The first version still uses local folders and markdown because they are the simplest reliable context and memory substrate. The long-term goal is larger: an AI creative team that can remember project context, understand user style, reuse proven workflows, and coordinate existing AI subscriptions without making the user copy-paste everything manually.
 
 ## Personal AI OS
 
 A personal AI operating system is not a new model. It is the layer that coordinates the models and tools a person already uses.
 
-For creators, that means Vurctne OS should know:
+For creators, that layer is the Core Assistant. It should know:
 
 - the user's creative taste
 - the user's preferred structure for projects
@@ -22,11 +24,11 @@ For creators, that means Vurctne OS should know:
 - the user's repeated decision patterns
 - the current state of every active project
 
-This memory should live in files first, not hidden inside a private cloud.
+This memory should live in files first, not hidden inside a private cloud. Future Hermes can strengthen this learning layer, but the user should still be able to inspect and edit what the system learns.
 
 ## AI Creative Team
 
-Vurctne OS treats AI tools like team members:
+VurctOS treats AI tools like team members:
 
 - ChatGPT can act as creative director, prompt writer, and visual judge.
 - Claude Code can act as CTO, executor, and project automation engineer.
@@ -35,7 +37,7 @@ Vurctne OS treats AI tools like team members:
 - Runway, Kling, Veo, Hailuo, and ComfyUI can act as image and video production systems.
 - Hermes Agent can become the future memory and self-learning layer.
 
-The user remains the director. Vurctne OS makes the team remember the brief, the rules, the files, the workflow, and the lessons learned.
+The user remains the director. The Core Assistant coordinates the team, remembers the brief, selects the relevant files, runs workflows, reviews outputs, and captures lessons learned.
 
 ## Self-Learning Workflows
 
@@ -52,7 +54,7 @@ A creator may repeatedly:
 - rewrite captions
 - package final prompt packs
 
-Vurctne OS should make repeated work visible, then turn it into reusable workflows and skills.
+The Core Assistant should make repeated work visible, then turn it into reusable workflows and skills.
 
 The goal is not to automate everything immediately. The goal is to capture what is repeatable, test it, and promote it into a skill only when it is useful.
 
@@ -60,7 +62,7 @@ The goal is not to automate everything immediately. The goal is to capture what 
 
 Memory is more than remembering facts.
 
-Vurctne OS should learn how the user makes decisions:
+VurctOS should learn how the user makes decisions:
 
 - what the user rejects
 - what the user repeats
@@ -101,13 +103,13 @@ The product should prioritize the reality of creative work:
 - local files
 - reusable project memory
 
-Vurctne OS should help creators finish work, not force them into a rigid enterprise workflow.
+VurctOS should help creators finish work, not force them into a rigid enterprise workflow.
 
 ## Subscription-First Direction
 
 Many creators already pay for AI subscriptions. The first version should respect that.
 
-Vurctne OS should prefer official login workflows where practical:
+VurctOS should prefer official login workflows where practical:
 
 - Claude Code login
 - Codex and ChatGPT login
@@ -118,9 +120,9 @@ API keys can be supported later, but they should not be required for the first v
 
 ## Long-Term Potential
 
-If the foundation works, Vurctne OS can grow into:
+If the foundation works, VurctOS can grow into:
 
-- a local project brain for creators
+- a Core Assistant that knows the creator's working style
 - a skill system for repeatable AI workflows
 - a memory layer that learns decision patterns
 - an orchestration layer that connects AI tools through MCP
@@ -129,4 +131,4 @@ If the foundation works, Vurctne OS can grow into:
 - a Vurctne Skills ecosystem for workflow packs
 - the open-source AI operating system layer underneath VI Studio
 
-The path starts small: one local project, one flagship workflow, one useful prompt pack.
+The path starts small: one Core Assistant model, one local context substrate, one flagship workflow, one useful prompt pack.

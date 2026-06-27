@@ -1,6 +1,6 @@
 # Project Agent Rules
 
-This folder is a Vurctne OS creator project.
+This folder is a VurctOS creator project.
 
 ## Project Purpose
 

@@ -1,6 +1,6 @@
-# Contributing To Vurctne OS
+# Contributing To VurctOS
 
-Vurctne OS is early-stage. The most useful contributions right now are clear documents, practical workflows, reusable skill templates, examples, and small scripts that support the local-first MVP.
+VurctOS is early-stage. The most useful contributions right now are clear documents, practical workflows, reusable skill templates, examples, and small scripts that support the local-first MVP.
 
 ## Project Stage
 

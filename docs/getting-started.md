@@ -1,6 +1,6 @@
 # Getting Started
 
-Vurctne OS is early-stage. Today, it is a local-first project structure and workflow foundation, not a finished application.
+VurctOS is early-stage. Today, it is a local-first project structure and workflow foundation, not a finished application.
 
 The future user experience should be simple:
 

@@ -1,6 +1,6 @@
 # Creator Workflow
 
-Vurctne OS starts with AI video because AI video production is creative, multi-tool, repetitive, and easy to lose track of.
+VurctOS starts with AI video because AI video production is creative, multi-tool, repetitive, and easy to lose track of.
 
 The creator workflow should help a user move from reference material to a reusable production pack.
 
@@ -47,7 +47,7 @@ Different tools can support different stages:
 
 The project folder is the communication layer.
 
-Instead of copying the full project history into every tool, Vurctne OS should prepare clean files:
+Instead of copying the full project history into every tool, VurctOS should prepare clean files:
 
 - current task
 - project profile

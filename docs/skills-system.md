@@ -1,6 +1,6 @@
 # Skills System
 
-A Vurctne OS skill is a reusable workflow learned from repeated work.
+A VurctOS skill is a reusable workflow learned from repeated work.
 
 Skills should begin as documents and templates. Later, they may become scripts, MCP tools, plugins, or marketplace packages.
 

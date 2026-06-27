@@ -1,10 +1,10 @@
 # AGENTS.md
 
-This repository is the foundation for Vurctne OS, an open-source personal AI operating system for AI creators.
+This repository is the foundation for VurctOS, an open-source personal AI operating system for AI creators.
 
 ## Project Purpose
 
-Vurctne OS turns existing AI subscriptions into a self-learning creative team.
+VurctOS turns existing AI subscriptions into a self-learning creative team.
 
 The first public direction is AI video production, starting with the Viral Video Reverse Engineering Workflow.
 
@@ -31,7 +31,7 @@ Before making substantive changes, read:
 ## Brand Rules
 
 - Vurctne is the parent developer and creator brand.
-- Vurctne OS is the open-source personal AI operating system.
+- VurctOS is the open-source personal AI operating system.
 - VI Studio is the AI video creation and advertising workflow layer.
 - VI means Vurctne Imagination.
 - Vurctne Skills is the future workflow and skill marketplace.

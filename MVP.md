@@ -2,7 +2,7 @@
 
 ## MVP Name
 
-Vurctne OS Viral Video Reverse Engineering MVP
+VurctOS Viral Video Reverse Engineering MVP
 
 ## Tight Definition
 

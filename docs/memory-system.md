@@ -1,6 +1,6 @@
 # Memory System
 
-Vurctne OS memory is not only for remembering facts.
+VurctOS memory is not only for remembering facts.
 
 The deeper goal is learning how the user works and makes decisions.
 
@@ -98,7 +98,7 @@ Examples:
 - why a tool was chosen for a step
 - what the creator consistently values
 
-This is where Vurctne OS can become more useful over time. It should learn decision patterns, not only store notes.
+This is where VurctOS can become more useful over time. It should learn decision patterns, not only store notes.
 
 ## Memory Update Rule
 

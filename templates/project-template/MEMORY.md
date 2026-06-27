@@ -1,6 +1,6 @@
 # Project Memory
 
-This file stores what Vurctne OS learns during this project.
+This file stores what VurctOS learns during this project.
 
 Memory should capture decisions, patterns, preferences, and workflow lessons, not only facts.
 

@@ -15,7 +15,7 @@ Deliverables:
 
 Success criteria:
 
-- a stranger on GitHub can understand Vurctne OS in less than 60 seconds
+- a stranger on GitHub can understand VurctOS in less than 60 seconds
 - the first MVP is clearly limited
 - the repo has no unnecessary dependencies
 - the project structure supports future work without overbuilding

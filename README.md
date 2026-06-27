@@ -1,6 +1,6 @@
-# Vurctne OS
+# VurctOS
 
-Vurctne OS is an open-source personal AI operating system that turns existing AI subscriptions into a self-learning creative team.
+VurctOS is an assistant-first open-source personal AI operating system that turns existing AI subscriptions into a self-learning creative team.
 
 It is for creators and builders who already use ChatGPT, Claude, Gemini, Codex, Runway, Kling, ComfyUI, Veo, Hailuo, CapCut, DaVinci Resolve, and other AI tools, but are tired of manually copying context between them.
 
@@ -18,13 +18,17 @@ Modern AI creators do not use one tool. They use many:
 
 These tools are powerful, but they do not share context, memory, project state, or workflow history. The creator becomes the operating system by copying prompts, re-explaining decisions, moving files, and remembering what worked.
 
-Vurctne OS exists to remove that friction.
+VurctOS exists to remove that friction.
 
-## What Vurctne OS Is
+## What VurctOS Is
 
-Vurctne OS is a local-first operating layer for AI creative work.
+VurctOS is an assistant-first operating layer for AI creative work.
 
-The first version is not a complex app. It is a clear project structure, documentation system, workflow format, memory model, and starter template for AI video production.
+The product center is the **VurctOS Core Assistant**. It understands user intent, looks up memory, selects project context, delegates work to specialized AI tools, reviews results, updates memory, and turns repeated workflows into skills.
+
+The local project folder remains important, but it is not the product center. It is the first local context and memory substrate: the place where inputs, outputs, prompts, analysis, decisions, and memory stay inspectable.
+
+The first version is not a complex app. It is a clear Core Assistant model, local context structure, workflow format, memory model, and starter template for AI video production.
 
 The first public demo is the **Viral Video Reverse Engineering Workflow**:
 
@@ -41,7 +45,7 @@ viral video input
 
 ## What It Is Not
 
-Vurctne OS is not:
+VurctOS is not:
 
 - another generic agent framework
 - a chatbot replacement
@@ -58,20 +62,21 @@ The first version should stay small enough to understand, run, and improve.
 
 1. Prefer official subscription login workflows where possible.
 2. Do not require API keys for the first version unless absolutely necessary.
-3. Use local files and project context as the stable communication layer.
-4. Add MCP orchestration later, after the local foundation works.
-5. Learn from repeated work and turn workflows into reusable skills.
-6. Remember user preferences, style, project rules, and decision patterns.
-7. Keep the system modular, open-source friendly, and easy to extend.
-8. Start with AI video production workflows.
-9. Do not overbuild the first public demo.
+3. Make the Core Assistant the product center.
+4. Use local files and project context as the first context and memory substrate.
+5. Add MCP orchestration later, after the assistant-first local foundation works.
+6. Learn from repeated work and turn workflows into reusable skills.
+7. Remember user preferences, style, project rules, and decision patterns.
+8. Keep the system modular, open-source friendly, and easy to extend.
+9. Start with AI video production workflows.
+10. Do not overbuild the first public demo.
 
 ## Founder Brand Context
 
-Vurctne OS sits underneath the Vurctne ecosystem:
+VurctOS sits underneath the Vurctne ecosystem:
 
 - **Vurctne**: parent developer and creator brand
-- **Vurctne OS**: open-source personal AI operating system
+- **VurctOS**: open-source personal AI operating system, short for Vurctne Operating System
 - **VI Studio**: AI video creation and advertising workflow layer, full name Vurctne Imagination
 - **Vurctne Skills**: future workflow and skill marketplace
 
@@ -83,6 +88,7 @@ This repository is in foundation mode.
 
 Created now:
 
+- Core Assistant model
 - project vision and manifesto
 - architecture outline
 - phased roadmap
@@ -107,8 +113,9 @@ Not created yet:
 ## Repository Structure
 
 ```text
-VurctneOS/
+VurctOS/
   README.md
+  CORE.md
   VISION.md
   MANIFESTO.md
   ARCHITECTURE.md
@@ -140,6 +147,6 @@ See `ROADMAP.md` for detail.
 
 ## Early-Stage Disclaimer
 
-Vurctne OS is an early-stage open-source project. The architecture, license, workflow format, and implementation details may change as the first real creator workflow is tested.
+VurctOS is an early-stage open-source project. The architecture, license, workflow format, and implementation details may change as the first real creator workflow is tested.
 
-The foundation is intentionally practical: local files first, subscription-first execution, memory that humans can inspect, and automation only where it proves useful.
+The foundation is intentionally practical: assistant-first coordination, local files as context substrate, subscription-first execution, memory that humans can inspect, and automation only where it proves useful.

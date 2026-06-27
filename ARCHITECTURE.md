@@ -2,21 +2,24 @@
 
 ## Architecture Goal
 
-The first architecture for Vurctne OS should be simple, local-first, and useful before it becomes automated.
+The first architecture for VurctOS should be assistant-first, local-memory-backed, and useful before it becomes automated.
 
-The system should begin as a project-folder operating layer for AI creative work. It should use files, workflows, memory, and skills as the foundation. MCP, plugins, and GUI layers should arrive later, after the local workflow proves itself.
+The system should begin with the VurctOS Core Assistant as the product center. Project folders remain important, but they are the first local context and memory substrate, not the product center. The Core Assistant uses files, workflows, memory, skills, and agent roles to coordinate creative work. MCP, plugins, and GUI layers should arrive later, after the assistant-first local model proves itself.
 
 ## High-Level Flow
 
 ```text
 User
-  -> Vurctne OS
-  -> Project Context
-  -> Agent Roles
-  -> Workflows
-  -> Memory
-  -> Skills
-  -> Outputs
+  -> VurctOS Core Assistant
+  -> intent detection
+  -> memory lookup
+  -> project context selection
+  -> agent delegation
+  -> workflow execution
+  -> result review
+  -> learning summary
+  -> memory update
+  -> skill candidate update
 ```
 
 ## Layer Diagram
@@ -24,6 +27,9 @@ User
 ```text
 Interface Layer
   CLI now, GUI later
+
+Core Assistant Layer
+  intent, context selection, delegation, review, learning
 
 Subscription-First Execution Layer
   official logins, copy-ready prompts, file handoff
@@ -44,11 +50,30 @@ Project Context Layer
   local files, folders, inputs, frames, analysis, prompts, outputs
 ```
 
-## Local-First Project Folder System
+## Core Assistant Layer
 
-The local project folder is the source of truth.
+The Core Assistant is the operating center of VurctOS.
 
-Each creative project should be understandable from files alone. A human, coding agent, or future MCP server should be able to open the folder and know:
+It should:
+
+- understand user intent
+- look up relevant memory
+- select the right project context
+- delegate work to specialized AI tools
+- coordinate subscription-first handoff
+- run workflows
+- review outputs
+- produce learning summaries
+- update memory
+- identify skill candidates
+
+See `CORE.md` for the canonical Core Assistant model.
+
+## Project Context Substrate
+
+The local project folder is the first context and memory substrate.
+
+Each creative project should be understandable from files alone. A human, coding agent, Core Assistant, or future MCP server should be able to open the folder and know:
 
 - what the project is
 - what input assets exist
@@ -76,9 +101,11 @@ project/
   final/
 ```
 
+Folders store context, evidence, outputs, prompts, and memory. The Core Assistant coordinates the work.
+
 ## Agent Roles
 
-Vurctne OS should define roles before it tries to automate orchestration.
+VurctOS should define roles before it tries to automate orchestration. The Core Assistant delegates work to these roles based on intent, context, and memory.
 
 ### Claude Code
 
@@ -153,9 +180,13 @@ Memory types:
 
 The system should learn decision patterns, not only facts.
 
+The Core Assistant uses memory before delegation and updates memory after result review.
+
 ## Workflow Layer
 
 Workflows are repeatable production paths.
+
+The Core Assistant runs workflows. Workflow files describe the pattern, but they are not the operating center.
 
 The first flagship workflow is:
 
@@ -196,7 +227,7 @@ The first version can create copy-ready prompts and file handoff instructions. A
 
 ## Future MCP Layer
 
-MCP should be added after the local project model is stable.
+MCP should be added after the assistant-first local model is stable.
 
 Future MCP capabilities:
 
@@ -235,7 +266,7 @@ The first version should not build a GUI. The local project folder and docs shou
 
 ## Security And Privacy
 
-Vurctne OS will handle creative IP and local project files.
+VurctOS will handle creative IP and local project files.
 
 Rules:
 

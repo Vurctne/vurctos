@@ -24,13 +24,13 @@ The problem is not that the tools are weak. The problem is that the tools are di
 
 The creator becomes the bridge. The creator copies context, reformats prompts, remembers rules, tracks versions, names outputs, judges quality, and rebuilds state every time a tool changes.
 
-Vurctne OS should make that bridge real.
+VurctOS should make that bridge real.
 
 ## We Do Not Want Another Generic Agent Framework
 
 Generic frameworks often start with abstractions before proving a workflow.
 
-Vurctne OS starts with a creator problem:
+VurctOS starts with a creator problem:
 
 How do we turn one input video into a useful creative prompt pack without losing context?
 
@@ -79,7 +79,7 @@ The next step after chatbots is personal AI operating systems.
 
 An operating system for AI work does not have to own every model. It has to coordinate the work, remember the context, and help the user improve over time.
 
-Vurctne OS starts with AI video production because that workflow is painful, multi-tool, creative, and highly repeatable.
+VurctOS starts with AI video production because that workflow is painful, multi-tool, creative, and highly repeatable.
 
 The ambition is large.
 

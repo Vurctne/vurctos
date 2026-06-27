@@ -69,7 +69,7 @@ PROFILE.md
 docs/
 ```
 
-For Vurctne OS project templates:
+For VurctOS project templates:
 
 ```text
 input/

@@ -1,6 +1,6 @@
 # Subscription-First Principle
 
-Vurctne OS should prefer official subscription login workflows where possible.
+VurctOS should prefer official subscription login workflows where possible.
 
 The first users already pay for AI tools. The system should help them use those tools together before forcing an API-first architecture.
 
@@ -23,7 +23,7 @@ Preferred early paths:
 - Gemini CLI login for video analysis or long-context analysis
 - subscription web tools for Kling, Runway, Veo, Hailuo, and similar systems
 
-## What Vurctne OS Should Do First
+## What VurctOS Should Do First
 
 The first version should:
 
