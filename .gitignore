@@ -1,0 +1,33 @@
+# Generated session index (machine-local instance data, rebuilt by `vurctos remember`)
+**/sessions/index.db
+
+# Reflection marker (machine-local instance data, managed by `vurctos reflect-apply`)
+**/reflections/.last-reflected
+
+# Obsidian per-machine vault config (a project folder doubles as a vault)
+.obsidian/
+
+# Python
+__pycache__/
+*.pyc
+
+# macOS
+.DS_Store
+
+# Personal root USER.md (private profile; kept local, not committed to the open-source repo)
+/USER.md
+
+# Defense in depth: a real project (with private USER.md / MEMORY.md / sessions)
+# should live OUTSIDE this repo, but if one is ever created inside a clone, do
+# not let its private memory be staged. The blank template scaffolds are the
+# only exception and stay tracked.
+**/USER.md
+!templates/**/USER.md
+**/MEMORY.md
+!templates/**/MEMORY.md
+**/sessions/*.md
+!templates/**/sessions/*.md
+
+# Local repo/source snapshots (never commit; the repo lives on GitHub)
+*.bundle
+vurctossource.zip

@@ -1,0 +1,126 @@
+# VurctOS CLI
+
+A small, local-first CLI that handles the deterministic plumbing of a VurctOS project. The judgment (planning, review) stays with Claude acting as Orchestrator; this CLI only does the repeatable mechanical steps.
+
+## Requirements
+
+- Python 3.8+
+
+No API keys. No dependencies.
+
+## Commands
+
+### Scaffold a project
+
+```bash
+python3 cli/vurctos.py new my-project
+```
+
+Copies `templates/project-template/` into `my-project/` (board, agent profiles, memory, skills, and the folder layout).
+
+### Remember something
+
+```bash
+python3 cli/vurctos.py remember --project my-project \
+  --what "warm key light reads as premium for this brand" \
+  --kind style --evidence "shot 3 accepted, shot 5 rejected"
+```
+
+Files one memory entry into all three inspectable places at once:
+
+- a timestamped bullet under `## Session Updates` in `MEMORY.md` (durable memory)
+- an entry in the day log `sessions/<date>.md` (session recall)
+- a row in `sessions/index.db`, the local SQLite full-text index
+
+`--kind` is one of `decision`, `style`, `tool`, `fail`, or `note` (default `note`). `--evidence` is optional. `--date YYYY-MM-DD` overrides today. The CLI only files what you give it; deciding what is worth remembering stays with Claude as Orchestrator.
+
+### Recall past memory
+
+```bash
+python3 cli/vurctos.py recall --project my-project "premium lighting"
+```
+
+Full-text searches past entries and prints the matches with their dates and day-log paths. It uses SQLite FTS5 when available and falls back to a substring search otherwise, so it works on any standard Python install. FTS5 query operators work in FTS mode; an invalid FTS query is retried as a plain AND of its words.
+
+```bash
+python3 cli/vurctos.py recall --project my-project --stats "reference image"
+python3 cli/vurctos.py recall --project my-project --stats
+```
+
+`--stats` turns recall into the promotion counter. With a query it reports how many matches there are across how many distinct dates; a lesson repeated on 3+ dates is flagged as a promotion candidate (a skill via `skill-new`, or user-level memory via `remember --global`), which turns the "promote only what repeats" rule from a hunch into a number. Without a query it prints per-kind totals and the fail/decision entries from the last 30 days, so capture coverage can be eyeballed.
+
+### Rebuild the search index
+
+```bash
+python3 cli/vurctos.py reindex --project my-project
+```
+
+The markdown day-logs are the source of truth; `sessions/index.db` is derived, machine-local, and gitignored. On a second machine or a fresh copy of a project the index does not exist, and `reflect-apply` prunes markdown without touching the index. `reindex` deletes the index and rebuilds it from the day-logs (also with `--global` for `~/.vurctos`).
+
+### Reflect (distill sessions into durable memory)
+
+```bash
+python3 cli/vurctos.py reflect --project my-project
+# the Orchestrator fills reflections/<date>.md, a human sets status: approved
+python3 cli/vurctos.py reflect-apply --project my-project
+```
+
+`reflect` collects the session day logs not yet reflected (since the last `reflections/.last-reflected` marker, or `--since DATE`) and stages a proposal at `reflections/<date>.md` with empty sections: additions to `USER.md`, additions to `MEMORY.md`, exact lines to prune, and skill candidates. Claude as Orchestrator distills the logs into that proposal (it does not copy them raw); a human reviews, edits, and sets `status: approved`.
+
+`reflect-apply` refuses unless the proposal is approved, then mechanically appends the additions under a dated `## Reflected Updates` block in `USER.md` / `MEMORY.md`, removes the exact prune lines, and advances the marker so those sessions are not reflected again. This is the loop that lets memory get sharper over time instead of just longer: distill, prune, and keep a human in the loop so a wrong distilled fact never silently poisons later sessions.
+
+### Global memory (cross-project)
+
+All memory commands accept `--global` to target the user-level memory at `~/.vurctos/` (override with `VURCTOS_HOME`) instead of a project:
+
+```bash
+python3 cli/vurctos.py remember --global --what "prefers warm, premium lighting" --kind style
+python3 cli/vurctos.py recall --global "premium"
+python3 cli/vurctos.py reflect --global
+```
+
+The global root is created and seeded on first use. It mirrors the project layout (`USER.md`, `MEMORY.md`, `sessions/` + index, `reflections/`) but holds what is true of the user across ALL projects: decision patterns, taste, recurring corrections. Add `@~/.vurctos/USER.md` to your `~/.claude/CLAUDE.md` and the distilled global memory loads in every Claude Code session, in every project. Promote a lesson from a project into global memory only when it is repeated, accepted, and useful beyond that project (see docs/memory-system.md).
+
+A `SessionStart` hook shipped in the project template nudges the assistant when session day-logs pile up unconsolidated, so the reflect loop gets driven instead of forgotten.
+
+### Dispatch (run one board card via headless Claude or Codex)
+
+```bash
+python3 cli/vurctos.py dispatch --project my-project --dry-run
+python3 cli/vurctos.py dispatch --project my-project
+python3 cli/vurctos.py dispatch --project my-project --agent codex
+```
+
+Picks the first card in `BOARD.md` with `status: ready` and `channel: local`, runs a headless agent inside the project (so `CLAUDE.md` / `AGENTS.md`, `USER.md`, `MEMORY.md`, and skills load themselves via your existing subscription login), then verifies the typed handoff and every expected output actually exist. On success the card moves to `review` (never `done`; a human or Codex reviews). On failure or a usage-limit hit it moves to `blocked` with the reason filed into memory.
+
+`--agent` picks the executor (default `claude`, runs `claude -p`; `codex` runs `codex exec` with a `workspace-write` sandbox on your ChatGPT login). Codex loads the same VurctOS memory through the `AGENTS.md` bridge, so either executor starts with your durable context. Each executor spends its own separate subscription quota.
+
+Boundaries by construction: cards with `channel: handoff` (subscription web tools) are never touched; the child environment strips both providers' billing routes (`ANTHROPIC_API_KEY` and auth token, base-URL and Bedrock/Vertex routes; `OPENAI_API_KEY`, `CODEX_API_KEY`, `CODEX_ACCESS_TOKEN`) and `--bare` is never used, so a run cannot silently switch to metered API billing. Requires the chosen CLI installed and logged in. `--timeout` caps a run (default 600s).
+
+**Trust model (read before dispatching):** dispatch feeds the card's own fields (title, notes, inputs, outputs) into a headless `claude -p` run with edits accepted. That is prompt-injection by design: dispatching a board executes the instructions its cards contain. So only dispatch a project whose cards **you authored or reviewed**; never run `dispatch` on a board you cloned or pulled from someone else without reading its cards first. The bounds above limit billing and which cards run, not what an authored instruction can do.
+
+To verify dispatch end to end against a real logged-in CLI once (the unit tests mock the subprocess), run `sh scripts/smoke-dispatch.sh` (add `--agent codex` for the Codex path); it costs one short headless run and checks the card lands in `review` with the exact expected output. Add `--negative` to check that a card whose expected output escapes the project is refused and lands in `blocked`.
+
+### Delegate to Codex inside a live session (subagent)
+
+`dispatch --agent codex` is the asynchronous, board-driven path. For synchronous delegation inside a live Claude Code conversation, `templates/codex-subagent/codex.md` is a Claude Code subagent whose only job is to run a task through `codex exec` and relay the result. Copy it to `~/.claude/agents/codex.md` (available everywhere) or a project's `.claude/agents/codex.md`. Then Claude can hand Codex a task or an independent review (Codex is the reviewer role: the planner should not grade its own work) without leaving the session. It defaults to a `read-only` sandbox for reviews. Note that Claude Code's native subagents run on Claude models; this one is a thin Claude wrapper that shells out to the Codex CLI, since a subagent cannot itself be backed by a non-Claude model. Each Codex run spends separate ChatGPT/Codex quota.
+
+### Reject reviewed work (the verdict-to-memory wire)
+
+```bash
+python3 cli/vurctos.py reject card-001 --project my-project --reason "pacing too slow in shot 3"
+```
+
+When a `review` card fails your review, one command closes the learning loop: the reason is filed as a `fail` entry through all three memory layers, stamped into the card's `notes:` (so the re-run prompt carries the feedback explicitly), and the card flips back to `ready` for the next dispatch. The re-run starts with the lesson twice over: in its prompt and in `MEMORY.md`. Rejection reasons are the highest-value learning signal; never let one evaporate.
+
+### Promote a proven pattern to a skill
+
+```bash
+python3 cli/vurctos.py skill-new premium-lighting-pass --project my-project
+```
+
+Scaffolds `skills/<name>/SKILL.md` in the agentskills.io format (frontmatter plus When To Use / Inputs / Steps / Agent Roles / Outputs / Review Criteria / Memory Updates). The name must be lowercase letters, numbers, and single hyphens, and must match the folder. The CLI only builds the skeleton: the Orchestrator fills it from the proven pattern (reflect proposals list the candidates), and a human reviews it before first use. Promotion rule: only a repeated, useful pattern becomes a skill; a single prompt is not a skill.
+
+## Why this is the whole point
+
+The CLI does only what is mechanical and repeatable. Everything that needs judgment is done by Claude reading the local files. This keeps the system local-first, subscription-first, and free of platform-terms risk.
