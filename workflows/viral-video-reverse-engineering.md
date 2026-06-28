@@ -40,7 +40,6 @@ project/
     image-prompts.md
     video-prompts.md
     captions.md
-    review-prompts.md
   images/
   videos/
   final/
@@ -77,9 +76,9 @@ Frame selection should capture:
 
 This step can be manual first. A script can come later.
 
-### 3. Analyze The Video
+### 3. Analyze The Video And Hook
 
-Save analysis in `analysis/video-analysis.md`.
+Save the overall analysis in `analysis/video-analysis.md` and a focused hook breakdown in `analysis/hook-analysis.md`.
 
 Analyze:
 
@@ -92,6 +91,8 @@ Analyze:
 - editing rhythm
 - text or caption strategy
 - what makes the video work
+
+The hook breakdown should isolate the first few seconds: the opening visual, the pattern interrupt, the promise made to the viewer, and why the viewer keeps watching.
 
 Recommended agent: Gemini for video analysis and long-context review.
 
@@ -156,18 +157,7 @@ Include:
 
 ### 8. Package Final Prompt Pack
 
-Save final output in `final/prompt-pack.md`.
-
-The final pack should include:
-
-- project summary
-- source pattern summary
-- shot list
-- image prompts
-- video prompts
-- captions
-- recommended generation order
-- quality checklist
+Save final output in `final/prompt-pack.md`, following the canonical Prompt Pack Structure defined at the end of this document. That structure is the single source of truth for the pack's sections.
 
 ### 9. Update Memory
 
@@ -182,11 +172,13 @@ Update `MEMORY.md` with:
 
 ## Agent Roles
 
+Claude acts as Orchestrator and assigns these worker roles through the board (see `ORCHESTRATION.md`):
+
 - Gemini: analyze video, transcript, frames, and long-context structure.
 - ChatGPT: improve creative direction, prompt language, captions, and visual judgment.
-- Claude Code: organize local files, create simple scripts, and package outputs.
+- Claude as Executor: organize local files, create simple scripts, and package outputs.
 - Codex: review consistency, structure, and implementation decisions.
-- Hermes Agent: future memory capture and self-learning layer.
+- Hermes: memory capture and learning, a file-based protocol now.
 
 ## Expected Output Files
 
@@ -197,7 +189,6 @@ analysis/hook-analysis.md
 prompts/image-prompts.md
 prompts/video-prompts.md
 prompts/captions.md
-prompts/review-prompts.md
 final/prompt-pack.md
 MEMORY.md
 ```

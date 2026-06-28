@@ -13,6 +13,7 @@ Agents should read local files before acting.
 Before making changes, read:
 
 - `README.md`
+- `BOARD.md`
 - `PROFILE.md`
 - `task.md`
 - `MEMORY.md`
@@ -20,6 +21,7 @@ Before making changes, read:
 ## Working Rules
 
 - Keep files human-readable.
+- Coordinate through `BOARD.md` and `handoffs/`, not direct agent messaging.
 - Do not delete source assets.
 - Do not overwrite generated outputs without permission.
 - Save analysis in `analysis/`.

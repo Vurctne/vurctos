@@ -29,11 +29,13 @@ Recommended workflow:
 
 ## Agent Roles
 
-- Claude Code:
+Claude acts as Orchestrator and assigns worker cards on `BOARD.md`:
+
+- Claude as Executor:
 - Codex:
 - Gemini:
 - ChatGPT:
-- Hermes Agent:
+- Hermes:
 
 ## Steps
 

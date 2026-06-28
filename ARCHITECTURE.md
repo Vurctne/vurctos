@@ -8,19 +8,13 @@ The system should begin with the VurctOS Core Assistant as the product center. P
 
 ## High-Level Flow
 
+The Core Assistant is realized by Claude acting as Orchestrator, which runs the canonical loop defined in `CORE.md`:
+
 ```text
-User
-  -> VurctOS Core Assistant
-  -> intent detection
-  -> memory lookup
-  -> project context selection
-  -> agent delegation
-  -> workflow execution
-  -> result review
-  -> learning summary
-  -> memory update
-  -> skill candidate update
+User -> Orchestrator (Claude) -> canonical loop -> reviewed result + memory and skill updates
 ```
+
+See `CORE.md` for the full nine-step loop and `ORCHESTRATION.md` for the coordination system that runs it.
 
 ## Layer Diagram
 
@@ -28,27 +22,32 @@ User
 Interface Layer
   CLI now, GUI later
 
-Core Assistant Layer
-  intent, context selection, delegation, review, learning
+Core Assistant Layer (Orchestrator)
+  Claude as Orchestrator: intent, context selection, delegation, review, learning
+  coordinates through a task board; see ORCHESTRATION.md
+
+Agent Role Layer
+  Orchestrator tier: Claude
+  Worker tier: Claude as Executor, Codex, Gemini, ChatGPT, Hermes, video tools
 
 Subscription-First Execution Layer
-  official logins, copy-ready prompts, file handoff
-
-Skill Layer
-  reusable workflow modules learned from repeated work
+  the access mechanism for the Agent Role layer: official logins,
+  CLI direct and copy handoff, explicit file handoff
 
 Workflow Layer
   markdown workflow definitions and prompt-pack processes
 
-Memory Layer
-  profile, project memory, workflow memory, style memory, decision memory
+Skill Layer
+  workflows promoted from the Workflow layer, in the SKILL.md standard
 
-Agent Role Layer
-  Claude Code, Codex, Gemini, ChatGPT, Hermes Agent
+Memory Layer
+  durable memory, procedural memory (skills), session recall
 
 Project Context Layer
   local files, folders, inputs, frames, analysis, prompts, outputs
 ```
+
+The Skill layer sits on top of the Workflow layer: a skill is a workflow promoted after it proves useful. The Subscription-First Execution layer is the access mechanism for the Agent Role layer, not a separate set of agents.
 
 ## Core Assistant Layer
 
@@ -67,7 +66,7 @@ It should:
 - update memory
 - identify skill candidates
 
-See `CORE.md` for the canonical Core Assistant model.
+The Core Assistant is realized by Claude acting as Orchestrator. See `CORE.md` for the canonical loop and `ORCHESTRATION.md` for the coordination system.
 
 ## Project Context Substrate
 
@@ -105,82 +104,15 @@ Folders store context, evidence, outputs, prompts, and memory. The Core Assistan
 
 ## Agent Roles
 
-VurctOS should define roles before it tries to automate orchestration. The Core Assistant delegates work to these roles based on intent, context, and memory.
+VurctOS defines roles before it automates orchestration. Claude acts as Orchestrator and delegates to worker roles based on intent, context, and memory.
 
-### Claude Code
-
-Role: CTO, executor, project automation engineer.
-
-Responsibilities:
-
-- create and modify project files
-- build simple scripts when needed
-- automate repeated local steps
-- keep implementation practical
-- avoid overbuilding
-
-### Codex
-
-Role: code review, implementation review, consistency checking.
-
-Responsibilities:
-
-- review architecture and implementation choices
-- check repo consistency
-- find missing docs and quality gaps
-- verify changes before completion
-
-### Gemini
-
-Role: video analysis and long-context research.
-
-Responsibilities:
-
-- analyze long videos and transcripts
-- compare references
-- extract structure from large context
-- support research-heavy workflow steps
-
-### ChatGPT
-
-Role: creative direction, prompt writing, visual judgment.
-
-Responsibilities:
-
-- write creative prompts
-- judge concept strength
-- improve scene and shot language
-- help with visual direction
-
-### Hermes Agent
-
-Role: future memory and self-learning layer.
-
-Responsibilities:
-
-- capture repeated decisions
-- summarize workflow learnings
-- update memory files
-- recommend new skills from repeated work
-
-Hermes Agent is a future concept, not part of the first implementation.
+The canonical role registry (Orchestrator tier, and worker tier: Claude as Executor, Codex, Gemini, ChatGPT, Hermes) lives in `CORE.md`. The agent profile format and the two delegation channels are defined in `ORCHESTRATION.md`.
 
 ## Memory Layer
 
-The memory layer should start as readable files.
+The memory layer starts as readable files, organized in three layers: durable memory (`PROFILE.md` and `MEMORY.md`), procedural memory (skills), and session recall (session logs). The system should learn decision patterns, not only facts.
 
-Memory types:
-
-- `PROFILE.md`: stable user and project preferences
-- `MEMORY.md`: accumulated project memory
-- project memory: facts and constraints for this project
-- workflow memory: what happened in the current workflow
-- style memory: recurring taste and visual rules
-- decision memory: why choices were made
-
-The system should learn decision patterns, not only facts.
-
-The Core Assistant uses memory before delegation and updates memory after result review.
+The Core Assistant uses memory before delegation and updates it after result review. The full memory model is defined in `docs/memory-system.md`.
 
 ## Workflow Layer
 
@@ -200,30 +132,11 @@ Workflows should be markdown-first until repeated steps justify scripts.
 
 ## Skill Layer
 
-Skills are reusable workflows learned from repeated work.
-
-Early skill examples:
-
-- Viral Video Analysis Skill
-- Kling Prompt Skill
-- AI Ad Film Skill
-- Vibe Coding Setup Skill
-- School Finance Automation Skill
-
-The first repository should document skill concepts before building a skill runtime.
+Skills are reusable workflows promoted from the Workflow layer after they prove useful. They follow the SKILL.md open standard. The skill model and the example skills are defined in `docs/skills-system.md`.
 
 ## Subscription-First Execution Layer
 
-The execution layer should prefer official subscription login workflows where possible.
-
-Examples:
-
-- Claude Code login for coding execution
-- Codex and ChatGPT login for review and creative prompting
-- Gemini CLI login for analysis and research
-- web subscriptions for Kling, Runway, Veo, Hailuo, and similar tools
-
-The first version can create copy-ready prompts and file handoff instructions. API keys may be supported later but should not be required now.
+This layer is the access mechanism for the Agent Role layer. It prefers official subscription login over API keys and reaches tools through two channels: CLI direct and copy handoff. The principle and the preferred login paths are defined in `docs/subscription-first.md`, and the channels are defined in `ORCHESTRATION.md`.
 
 ## Future MCP Layer
 

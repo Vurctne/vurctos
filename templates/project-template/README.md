@@ -6,15 +6,20 @@ Use this folder to keep one creative workflow organized from input assets to fin
 
 ## Folder Map
 
+- `BOARD.md`: the task board, single source of truth for coordination
+- `agents/`: agent profiles the Orchestrator assigns cards to
+- `handoffs/`: structured result files, one per card
+- `sessions/`: dated session logs (session recall memory)
+- `skills/`: project-specific experimental skills
 - `input/`: source video, transcript, screenshots, reference files
 - `frames/`: extracted or selected frames
 - `analysis/`: video analysis, hook analysis, shot breakdown
-- `prompts/`: image prompts, video prompts, captions, review prompts
+- `prompts/`: image prompts, video prompts, captions
 - `images/`: generated image outputs
 - `videos/`: generated video outputs
 - `final/`: final prompt pack and delivery files
-- `PROFILE.md`: creator, brand, and project context
-- `MEMORY.md`: project learning and decision memory
+- `PROFILE.md`: creator, brand, and project context (durable memory)
+- `MEMORY.md`: project learning and decision memory (durable memory)
 - `task.md`: current task and acceptance criteria
 - `AGENTS.md`: project-level agent rules
 

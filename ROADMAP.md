@@ -81,7 +81,7 @@ Success criteria:
 
 ## Phase 4: Agent Orchestration
 
-Goal: define practical cooperation between Claude Code, Codex, Gemini, ChatGPT, and future Hermes Agent.
+Goal: strengthen the orchestration model in `ORCHESTRATION.md`, with Claude as Orchestrator coordinating Codex, Gemini, ChatGPT, and Hermes.
 
 Deliverables:
 

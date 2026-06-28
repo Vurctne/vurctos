@@ -19,6 +19,34 @@ A useful skill should define:
 
 The goal is to make repeated work easier without hiding the process.
 
+## Skill Format
+
+VurctOS skills follow the SKILL.md open standard (agentskills.io), so a skill is portable to and from the wider ecosystem and the future Vurctne Skills marketplace stays compatible by default.
+
+A skill is a directory under `skills/`:
+
+```text
+skills/
+  viral-video-analysis/
+    SKILL.md
+    references/
+    scripts/
+    assets/
+```
+
+`SKILL.md` is YAML frontmatter plus a markdown body. Required frontmatter is `name` and `description` only:
+
+```text
+---
+name: viral-video-analysis
+description: Break a viral short video into hook, shot structure, and style notes. Use when the user wants to reverse engineer a reference video into a prompt pack.
+version: 0.1.0
+author: vurctne
+---
+```
+
+Rules from the standard: `name` is lowercase letters, numbers, and hyphens and must match the folder name. `description` must state both what the skill does and when to use it, since that is what makes the Orchestrator select it. Avoid angle brackets in frontmatter. The markdown body should cover the items above: when to use, inputs, steps, agent roles, outputs, quality checks, and memory updates.
+
 ## Early Skill Examples
 
 ### Viral Video Analysis Skill
@@ -91,13 +119,7 @@ It may include:
 
 ## Skill Storage
 
-Early skills can live in:
-
-```text
-skills/
-```
-
-Project-specific skill notes can also live inside a project folder when the skill is still experimental.
+Repository-level skills live in the top-level `skills/` directory, each as its own SKILL.md directory. Project-specific skill notes can also live inside a project folder under `skills/` when the skill is still experimental.
 
 ## Quality Rule
 

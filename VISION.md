@@ -6,7 +6,7 @@ VurctOS is not a folder workflow tool.
 
 It is intended to become a personal AI operating system that learns how the user thinks, works, creates, decides, and improves.
 
-The product center is the VurctOS Core Assistant. It understands user intent, looks up memory, selects project context, delegates work to multiple AI tools, reviews outputs, and learns from the result.
+The product center is the VurctOS Core Assistant. It understands user intent, looks up memory, selects project context, delegates work to specialized AI tools, reviews outputs, and learns from the result.
 
 The first version still uses local folders and markdown because they are the simplest reliable context and memory substrate. The long-term goal is larger: an AI creative team that can remember project context, understand user style, reuse proven workflows, and coordinate existing AI subscriptions without making the user copy-paste everything manually.
 
@@ -24,20 +24,20 @@ For creators, that layer is the Core Assistant. It should know:
 - the user's repeated decision patterns
 - the current state of every active project
 
-This memory should live in files first, not hidden inside a private cloud. Future Hermes can strengthen this learning layer, but the user should still be able to inspect and edit what the system learns.
+This memory should live in files first, not hidden inside a private cloud. Hermes can further strengthen this learning layer over time, but the user should still be able to inspect and edit what the system learns.
 
 ## AI Creative Team
 
 VurctOS treats AI tools like team members:
 
+- Claude can act as the Orchestrator that coordinates the team, and as Executor for code and local automation.
 - ChatGPT can act as creative director, prompt writer, and visual judge.
-- Claude Code can act as CTO, executor, and project automation engineer.
 - Codex can act as implementation reviewer, code reviewer, and consistency checker.
 - Gemini can act as video analyst, long-context researcher, and source reviewer.
 - Runway, Kling, Veo, Hailuo, and ComfyUI can act as image and video production systems.
-- Hermes Agent can become the future memory and self-learning layer.
+- Hermes can act as the memory and learning role, a file-based protocol now and stronger automation later.
 
-The user remains the director. The Core Assistant coordinates the team, remembers the brief, selects the relevant files, runs workflows, reviews outputs, and captures lessons learned.
+The user remains the director. Claude as Orchestrator coordinates the team, remembers the brief, selects the relevant files, runs workflows, reviews outputs, and captures lessons learned. See `CORE.md` for the canonical roles.
 
 ## Self-Learning Workflows
 
@@ -75,17 +75,7 @@ This memory should be readable, editable, and portable.
 
 ## Skills
 
-A skill is a reusable workflow learned from repeated work.
-
-Examples:
-
-- Viral Video Analysis Skill
-- Kling Prompt Skill
-- AI Ad Film Skill
-- Vibe Coding Setup Skill
-- School Finance Automation Skill
-
-Skills should start as documents and templates. Later, they can become executable modules, MCP tools, or marketplace packages.
+A skill is a reusable workflow learned from repeated work. It should start as documents and templates and can later become executable modules, MCP tools, or marketplace packages. The skill model and the example skills are defined in `docs/skills-system.md`.
 
 ## Creator-First Direction
 
@@ -107,16 +97,7 @@ VurctOS should help creators finish work, not force them into a rigid enterprise
 
 ## Subscription-First Direction
 
-Many creators already pay for AI subscriptions. The first version should respect that.
-
-VurctOS should prefer official login workflows where practical:
-
-- Claude Code login
-- Codex and ChatGPT login
-- Gemini CLI login
-- web subscriptions for video tools
-
-API keys can be supported later, but they should not be required for the first version.
+Many creators already pay for AI subscriptions. The first version should respect that and prefer official login workflows over API keys. The principle and the preferred login paths are defined in `docs/subscription-first.md`.
 
 ## Long-Term Potential
 

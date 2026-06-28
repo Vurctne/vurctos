@@ -26,6 +26,8 @@ VurctOS is an assistant-first operating layer for AI creative work.
 
 The product center is the **VurctOS Core Assistant**. It understands user intent, looks up memory, selects project context, delegates work to specialized AI tools, reviews results, updates memory, and turns repeated workflows into skills.
 
+Concretely, Claude acts as the Orchestrator that runs this model: it coordinates Codex, Gemini, ChatGPT, and other tools through a file-based task board, subscription-first handoff, and a typed result contract. See `CORE.md` for the loop and `ORCHESTRATION.md` for the coordination system.
+
 The local project folder remains important, but it is not the product center. It is the first local context and memory substrate: the place where inputs, outputs, prompts, analysis, decisions, and memory stay inspectable.
 
 The first version is not a complex app. It is a clear Core Assistant model, local context structure, workflow format, memory model, and starter template for AI video production.
@@ -89,6 +91,7 @@ This repository is in foundation mode.
 Created now:
 
 - Core Assistant model
+- orchestration model (Claude as Orchestrator)
 - project vision and manifesto
 - architecture outline
 - phased roadmap
@@ -116,6 +119,7 @@ Not created yet:
 VurctOS/
   README.md
   CORE.md
+  ORCHESTRATION.md
   VISION.md
   MANIFESTO.md
   ARCHITECTURE.md
@@ -124,6 +128,7 @@ VurctOS/
   AGENTS.md
   CONTRIBUTING.md
   LICENSE
+  NOTICE
   docs/
   workflows/
   templates/project-template/
@@ -145,8 +150,14 @@ VurctOS/
 
 See `ROADMAP.md` for detail.
 
+## License
+
+VurctOS is open source under the Apache License 2.0. See `LICENSE` and `NOTICE`.
+
+The project follows an open-core direction: the open-source foundation (coordination model, workflows, skill format, documentation) stays useful on its own, while future commercial layers such as VI Studio and the Vurctne Skills marketplace can build on top without compromising the local-first core.
+
 ## Early-Stage Disclaimer
 
-VurctOS is an early-stage open-source project. The architecture, license, workflow format, and implementation details may change as the first real creator workflow is tested.
+VurctOS is an early-stage open-source project. The architecture, workflow format, and implementation details may change as the first real creator workflow is tested.
 
 The foundation is intentionally practical: assistant-first coordination, local files as context substrate, subscription-first execution, memory that humans can inspect, and automation only where it proves useful.

@@ -4,6 +4,8 @@ VurctOS starts with AI video because AI video production is creative, multi-tool
 
 The creator workflow should help a user move from reference material to a reusable production pack.
 
+Status: today the creator runs these steps manually with subscription tools. Claude as Orchestrator coordinating them is the target model, not a shipped runtime.
+
 ## Core Flow
 
 ```text
@@ -35,11 +37,11 @@ The creator decides:
 
 ## AI Tool Roles
 
-Different tools can support different stages:
+Claude acts as Orchestrator and assigns these worker roles by stage (see `CORE.md`):
 
 - Gemini can analyze long video context and extract structure.
 - ChatGPT can help with creative direction, captions, and prompt writing.
-- Claude Code can organize files and create local automation.
+- Claude as Executor can organize files and create local automation.
 - Codex can review consistency and implementation decisions.
 - Kling, Runway, Veo, Hailuo, or ComfyUI can generate visual outputs.
 
@@ -59,7 +61,7 @@ The user can paste or upload only what each tool needs.
 
 ## Viral Video Analysis
 
-The first flagship workflow studies a viral video and extracts:
+The first flagship workflow is designed to study a viral video and extract:
 
 - hook
 - pacing

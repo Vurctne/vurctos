@@ -6,6 +6,10 @@ The local project folder remains important, but it is not the product center. It
 
 The product center is the **VurctOS Core Assistant**: a personal AI operating system layer that understands user intent, recalls memory, selects project context, delegates work to specialized AI tools, reviews outputs, updates memory, and turns repeated workflows into reusable skills.
 
+The Core Assistant is realized concretely by Claude acting as Orchestrator. This page defines the operating loop the Orchestrator runs. The coordination system that supports it (the task board, agent profiles, delegation channels, and the handoff contract) is defined in `ORCHESTRATION.md`.
+
+Status: today this loop is run by Claude plus subscription tools over local files. The heavier coordination and automation described across these docs is the target operating model, not a shipped runtime.
+
 ## What The Core Assistant Is
 
 The Core Assistant is the central intelligence of VurctOS.
@@ -103,20 +107,33 @@ The folder stores context, evidence, outputs, and memory. The folder does not ru
 
 ## 4. Agent Delegation
 
-The Core Assistant delegates work to specialized agent roles.
+The Orchestrator does not do all the work itself. It decomposes the request, assigns work to agent profiles through a shared task board, coordinates subscription-first handoff, and reviews results before accepting them.
 
-### Claude Code
+This section is the canonical registry of agent roles. The coordination mechanics (the board, agent profiles, the two delegation channels, and the handoff contract) are defined in `ORCHESTRATION.md`.
 
-Use Claude Code for:
+Roles are organized in two tiers.
 
-- execution
-- project automation
+### Orchestrator Tier
+
+#### Claude (Orchestrator)
+
+Claude runs the loop on this page: intent detection, memory lookup, context selection, delegation, result review, and memory and skill updates. As Orchestrator it should prefer to delegate, and it should never review its own execution output.
+
+### Worker Tier
+
+#### Claude as Executor
+
+The same Claude engine assigned a board card as a worker, for:
+
+- execution and implementation work
 - local file operations
+- project automation
 - simple scripts when justified
-- implementation work
 - converting repeated manual steps into practical tools
 
-### Codex
+Codex reviews Claude as Executor output, so the planner and the reviewer are never the same.
+
+#### Codex
 
 Use Codex for:
 
@@ -127,7 +144,7 @@ Use Codex for:
 - verification planning
 - overbuild detection
 
-### Gemini
+#### Gemini
 
 Use Gemini for:
 
@@ -137,7 +154,7 @@ Use Gemini for:
 - reference comparison
 - extracting structure from large source material
 
-### ChatGPT
+#### ChatGPT
 
 Use ChatGPT for:
 
@@ -148,11 +165,9 @@ Use ChatGPT for:
 - caption writing
 - audience and story framing
 
-### Hermes Agent
+#### Hermes (Memory and Learning)
 
-Hermes Agent is the future learning layer.
-
-Use Hermes later for:
+Hermes is the memory and learning role. Today it runs as a file-based memory protocol that the Orchestrator follows: it reads durable memory before acting, then updates memory, session logs, and skill candidates after review. Stronger automation is future work:
 
 - persistent memory refinement
 - decision-pattern learning
@@ -160,7 +175,7 @@ Use Hermes later for:
 - personalization feedback
 - cross-project learning
 
-Hermes is not required for the first implementation, but the Core Assistant should be designed so Hermes can eventually strengthen the learning loop.
+The memory layer is defined in `docs/memory-system.md`. VurctOS borrows the memory and learning design from the open-source Hermes Agent project but implements it as inspectable files first.
 
 ## 5. Subscription-First Tool Coordination
 
@@ -177,6 +192,8 @@ Instead of forcing every task through APIs, it should coordinate tools through:
 
 API keys and automation can come later. The first useful operating model should work with tools the user already subscribes to.
 
+The subscription-first principle and the preferred login paths are defined in `docs/subscription-first.md`. The two concrete delegation channels (CLI direct and copy handoff) are defined in `ORCHESTRATION.md`.
+
 ## 6. Workflow Execution
 
 Workflows are not the center of VurctOS. They are reusable operating patterns run by the Core Assistant.
@@ -187,7 +204,7 @@ For example, the Viral Video Reverse Engineering Workflow is executed by the Cor
 - select relevant project context and memory
 - delegate video understanding to Gemini
 - delegate prompt drafting to ChatGPT
-- delegate local organization or packaging to Claude Code
+- delegate local organization or packaging to Claude as Executor
 - delegate review and consistency checking to Codex
 - coordinate Kling, Runway, or similar tools through subscription-first handoff
 - review outputs
@@ -214,7 +231,7 @@ Some review can be delegated:
 - Codex reviews implementation and consistency.
 - ChatGPT reviews creative direction and prompt quality.
 - Gemini reviews source-video alignment.
-- Future Hermes reviews memory and personalization impact.
+- Hermes reviews memory and personalization impact.
 
 ## 8. Learning Summary
 
@@ -288,7 +305,7 @@ The assistant's inspectable learning layer. Memory stores preferences, project s
 
 ### Skills
 
-Reusable workflows that have proven themselves through repetition. Skills are promoted from repeated work and should include process, inputs, outputs, review criteria, and memory behavior.
+Reusable workflows that have proven themselves through repetition. Skills are promoted from repeated work and should include process, inputs, outputs, review criteria, and memory behavior. Skills follow the SKILL.md open standard; see `docs/skills-system.md`.
 
 ### Project Folders
 
@@ -298,9 +315,9 @@ The first local context and memory substrate. Project folders store files, evide
 
 The future orchestration protocol layer. MCP can expose project context, memory, workflow tools, and adapter functions to the Core Assistant after the local model is stable.
 
-### Future Hermes Layer
+### Hermes Memory And Learning
 
-The future self-learning layer. Hermes should refine memory, detect decision patterns, recommend skills, and make the Core Assistant more personalized across projects.
+The memory and learning role. It runs today as a file-based memory protocol and is designed to grow into stronger automation. Hermes refines memory, detects decision patterns, recommends skills, and makes the Core Assistant more personalized across projects. See `ORCHESTRATION.md` and `docs/memory-system.md`.
 
 ## Personalization Over Time
 

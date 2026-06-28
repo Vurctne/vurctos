@@ -19,6 +19,8 @@ Do not build the full system yet. Prefer clear markdown, simple project template
 Before making substantive changes, read:
 
 - `README.md`
+- `CORE.md`
+- `ORCHESTRATION.md`
 - `VISION.md`
 - `MANIFESTO.md`
 - `ARCHITECTURE.md`
@@ -67,6 +69,7 @@ Use these names consistently.
 ## Architecture Rules
 
 - Local files are the first stable communication layer.
+- Agents coordinate through the task board and handoff files, not direct messaging.
 - Workflows should be markdown-first until automation is justified.
 - Memory should be inspectable and editable.
 - Skills should be reusable workflow patterns, not hidden magic.
@@ -75,11 +78,13 @@ Use these names consistently.
 
 ## Agent Role Defaults
 
-- Claude Code: CTO, executor, project automation.
+- Claude: Orchestrator (the Core Assistant), and as a worker the Executor for code and local automation.
 - Codex: code review, implementation review, consistency checking.
 - Gemini: video analysis and long-context research.
 - ChatGPT: creative direction, prompt writing, visual judgment.
-- Hermes Agent: future memory and self-learning layer.
+- Hermes: memory and learning, a file-based protocol now and stronger automation later.
+
+The canonical role registry is in `CORE.md`; the coordination system is in `ORCHESTRATION.md`.
 
 ## Definition Of Done
 

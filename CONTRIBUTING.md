@@ -9,7 +9,7 @@ The project is in foundation mode.
 That means:
 
 - the architecture is still being shaped
-- the license is not final yet
+- the project is licensed under Apache License 2.0
 - the MVP should remain narrow
 - docs and workflow clarity matter more than code volume
 - no one should add a large runtime without discussion
@@ -81,3 +81,7 @@ When code is added later, it should be:
 - easy to remove if the workflow changes
 
 Do not introduce a framework just to prepare for future complexity.
+
+## License
+
+By contributing, you agree that your contributions are licensed under the Apache License 2.0, the same license that covers the project. See `LICENSE`.
