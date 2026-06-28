@@ -10,7 +10,7 @@ See `ORCHESTRATION.md` in the repository root for the full model.
 - id: card-001
   title: Short description of the unit of work
   assignee: gemini
-  channel: cli
+  channel: handoff
   status: ready
   inputs:
     - input/source.mp4
@@ -22,7 +22,7 @@ See `ORCHESTRATION.md` in the repository root for the full model.
 ```
 
 - `assignee`: an agent profile in `agents/` (claude, claude-exec, codex, gemini, chatgpt, hermes, or a video tool).
-- `channel`: `cli` for CLI direct, or `handoff` for copy handoff to a web tool.
+- `channel`: `handoff` for copy handoff (the default for subscription tools, human in the loop), or `local` for assisted local execution (claude-exec, local ComfyUI). VurctOS does not headlessly automate subscription logins.
 - `status`: `backlog`, `ready`, `in-progress`, `review`, `done`, or `blocked`.
 
 A card is never marked `done` until the Orchestrator has reviewed the result.

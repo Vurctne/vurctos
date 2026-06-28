@@ -79,12 +79,15 @@ Worker tier:
 - `kling`, `runway`, and similar: image and video generation.
 - `hermes`: memory and learning. Today this is the memory protocol in section 5, run by the Orchestrator over files. Stronger automation is future work.
 
-### Two Delegation Channels
+### Delegation Channels And The Automation Boundary
 
-Every worker is reached through one of two channels, both subscription-first:
+Workers are reached through delegation channels, with a hard compliance rule between them.
 
-- Channel A, CLI direct: the Orchestrator invokes a subscription-login CLI and reads the result back. Used for `gemini`, `codex`, and `claude-exec`. Higher automation, no API keys.
-- Channel B, copy handoff: the Orchestrator produces a copy-ready prompt, an upload list, and an expected output location. A human pastes it into the web tool and saves the result back. Used for `chatgpt`, `kling`, `runway`, and other web-only tools.
+Compliance rule: VurctOS does not automate subscription tools as if they were APIs. A third party programmatically driving a subscription login (for example invoking the Gemini CLI or ChatGPT from an orchestrator) can violate those tools' terms of service and risk account suspension. Background, headless, or batch automation of a subscription login is not allowed.
+
+- Channel B, copy handoff (default): the Orchestrator produces a copy-ready prompt, an upload list, and an expected output location. A human runs the tool (web or their own interactive CLI session) and saves the result back. Used for `gemini`, `codex`, `chatgpt`, `kling`, `runway`, and other subscription tools. Fully human-in-the-loop and within terms of service.
+- Channel A, assisted local execution (limited): the Orchestrator runs only tools whose terms permit programmatic local use, such as `claude-exec` (its own code and file work) and a local ComfyUI. It does not headlessly drive subscription logins.
+- API mode (opt-in only): for the subset of tools that offer a compliant API, the user may explicitly enable API access for a profile. This is never the default and is never required for v1.
 
 A profile file declares: tier, channel, responsibilities, allowed skills, the handoff format it expects, and who reviews its output.
 
@@ -196,7 +199,7 @@ The canonical loop lives in `CORE.md`. This is how each step maps to the orchest
 
 - Prefer subscription login over API keys. The first version requires no API keys.
 - Do not commit secrets, tokens, browser sessions, or private creator assets.
-- Do not automate web tools in ways that violate platform terms. Channel B keeps a human in the loop for web tools.
+- Do not automate subscription tools as if they were APIs. Driving a subscription login from an orchestrator can violate platform terms and risk account suspension. Channel B keeps a human in the loop for these tools; programmatic access is limited to tools whose terms allow it, or to an explicit opt-in API mode.
 - Keep the board, handoffs, memory, and skills inspectable and editable.
 
 ## 9. Growth Path
