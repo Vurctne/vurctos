@@ -515,6 +515,13 @@ def cmd_reflect(args):
         "skipped on apply. Do not start a body line with `## ` and list only "
         "exact, unique stale lines under Prune.",
         "",
+        "Keep out of durable memory (day-log only): transient facts such as "
+        "rankings or market data, environment-dependent failures, negative "
+        "tool claims, transient errors that already resolved, and one-off "
+        "task narratives. When an addition updates an existing durable fact, "
+        "prune the superseded line in the SAME apply instead of stacking a "
+        "second entry beside it.",
+        "",
         f"## {SEC_USER}",
         "",
         f"## {SEC_MEM}",

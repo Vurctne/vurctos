@@ -128,6 +128,8 @@ Memory that only grows gets slower and noisier, not smarter. The step that makes
 
 In VurctOS this runs as `vurctos reflect` (see `cli/README.md`): the CLI gathers the unreflected day logs and stages a proposal; Claude as Orchestrator distills them into proposed `USER.md` and `MEMORY.md` updates, prunes, and skill candidates; a human approves before anything is written to durable memory. Keep both the concrete dated logs and the distilled abstractions. The human approval gate is deliberate: a single wrong distilled fact, written unchecked into `USER.md`, would quietly affect every later session.
 
+Two write-time disciplines keep the durable layer from bloating (adopted from the Hermes Agent memory design, which uses hard size budgets plus consolidate-on-write rather than any automatic decay): keep transient or soon-stale content out of durable memory entirely (rankings and market data, environment-dependent failures, negative tool claims, transient errors that already resolved, one-off task narratives; the day-log keeps them as dated history), and supersede instead of append (a proposal that updates an existing durable fact prunes the old line in the same apply, so revisions never stack). The staged proposal template restates both.
+
 Full-text recall (the SQLite FTS5 index) is sufficient for a single-user local system; vector embeddings are not required and are deferred unless recall is shown to miss relevant memories at scale.
 
 ## Memory Update Rule
